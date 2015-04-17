@@ -117,6 +117,9 @@ fi
 alias ':q'='exit'
 alias clc='clear'
 
+# vim - open in vertically split windows by default
+alias vim="vim -O"
+
 # don't show hidden directories/files in tab-completion
 bind 'set match-hidden-files off'
 
