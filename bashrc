@@ -116,6 +116,8 @@ fi
 
 alias ':q'='exit'
 alias clc='clear'
+alias status='git status'
+alias pythonserve='python -m SimpleHTTPServer'
 
 # vim - open in vertically split windows by default
 alias vim="vim -O"
