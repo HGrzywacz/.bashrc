@@ -56,11 +56,17 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
+# Add git branch if its present to PS1
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+# if [ "$color_prompt" = yes ]; then
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    # PS1='\h:\W $(parse_git_branch)\\$\[$(tput sgr0)\]\$'
+# else
+    PS1='\w$(parse_git_branch)\n> \[$(tput sgr0)\]'
+# fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -126,11 +132,17 @@ alias vim="vim -O"
 bind 'set match-hidden-files off'
 
 NPM_PACKAGES="~/.npm-packages"
+CABAL_PACKAGES="~/.cabal/bin"
 
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-PATH="$NPM_PACKAGES/bin:$PATH"
+PATH="$CABAL_PACKAGES:$NPM_PACKAGES/bin:$PATH"
 unset MANPATH
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # secret settings that I don't want in my public github repository : )
 source ~/.bash/secret.bash 2> /dev/null
+eval $(thefuck --alias)
+
+# Removes gpg's "problem with agent"
+# http://superuser.com/a/799592
+export GPG_TTY=$(tty)
