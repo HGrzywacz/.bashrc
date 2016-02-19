@@ -124,6 +124,7 @@ alias ':q'='exit'
 alias clc='clear'
 alias status='git status'
 alias pythonserve='python -m SimpleHTTPServer'
+alias python='python3'
 
 # vim - open in vertically split windows by default
 alias vim="vim -O"
@@ -132,7 +133,7 @@ alias vim="vim -O"
 bind 'set match-hidden-files off'
 
 NPM_PACKAGES="~/.npm-packages"
-CABAL_PACKAGES="~/.cabal/bin"
+CABAL_PACKAGES="$HOME/.cabal/bin"
 
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 PATH="$CABAL_PACKAGES:$NPM_PACKAGES/bin:$PATH"
